@@ -22,32 +22,36 @@ input LoginInput {
   password: String!
 }
 
- type Task {
+ type Product {
    id: ID,
-   title: String,
+   title: String
+   price: String
+   imgUrl: String
    description: String
  }
  
- input TaskInput {
+ input ProductInput {
    title: String
+   price: String
+   imgUrl: String
    description: String
+   
  }
 
  type Query {
    hello: String,
-   getAllTask: [Task]
-   getTask(id: ID): Task
+   getAllProduct: [Product]
+   getProduct(id: ID): Product
    user(id: ID!) : User
  }
 
  type Mutation {
-   createTask(task: TaskInput ): Task
-   deleteTask(id: ID!): String
-   updateTask(id: ID!, task: TaskInput) : Task
+   createProduct(product: ProductInput ): Product
+   deleteProduct(id: ID!): String
+   updateProduct(id: ID!, product: ProductInput) : Product
    registerUser(registerInput: RegisterInput) : User
    loginUser(loginInput: LoginInput) : User
-  #  register(username: String!, email: String! , password: String!) : String!
-  #  login(username: String!, email: String!,  password: String!) : String!
+
  }
 
 `

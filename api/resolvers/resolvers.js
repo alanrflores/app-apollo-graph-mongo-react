@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const Task = require("../models/Task");
+const Product = require("../models/Product");
 const User = require("../models/User");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -9,14 +9,14 @@ const bcrypt = require('bcryptjs');
 const resolvers = {
     Query: {
         hello: () => 'Hello World',
-        getAllTask : async() => {
-            const talk = await Task.find()
-            return talk;
+        getAllProduct : async() => {
+            const product = await Product.find()
+            return product;
         },
         //no tengo una consulta para el parent por esos el guion bajo
-        getTask: async(_, args) => {
-            const taskId = await Task.findById(args.id)
-            return taskId;
+        getProduct: async(_, args) => {
+            const productId = await Product.findById(args.id)
+            return productId;
         },
        user: async(_, args) => {
           const userId = await User.findById(args.id)
@@ -24,23 +24,23 @@ const resolvers = {
         },
     },
     Mutation: {
-        createTask: async(_, args) => {
-            const { title, description } = args.task;
-            const newTask = new Task({title, description})
-            console.log(newTask); 
-            await newTask.save();
-            return newTask;
+        createProduct: async(_, args) => {
+            const { title, price, imgUrl, description } = args.product;
+            const newProduct = new Product({title, price, imgUrl, description})
+            console.log(newProduct); 
+            await newProduct.save();
+            return newProduct;
         },
-        deleteTask: async(_, args) => {
-            await Task.findByIdAndDelete(args.id)
-            return "TASK DELETE"
+        deleteProduct: async(_, args) => {
+            await Product.findByIdAndDelete(args.id)
+            return "Product DELETE"
         },
-        updateTask: async(_, args) => {
-            const taskUpdate = await Task.findByIdAndUpdate(args.id,{
-                //propiedad $set actualiza los campos que trae task, es mas generico 
-                $set: args.task
+        updateProduct: async(_, args) => {
+            const ProductUpdate = await Product.findByIdAndUpdate(args.id,{
+                //propiedad $set actualiza los campos que trae Product, es mas generico 
+                $set: args.Product
             }, {new: true} );
-            return taskUpdate;
+            return ProductUpdate;
         },
         registerUser: async(_, {registerInput: {username, email, password} }) => {
             const oldUser = await User.findOne({ email })
