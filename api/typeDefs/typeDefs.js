@@ -41,7 +41,7 @@ input LoginInput {
  type Query {
    hello: String,
    getAllProduct: [Product]
-   getProduct(id: ID): Product
+   findProduct(id: ID): Product
    user(id: ID!) : User
  }
 

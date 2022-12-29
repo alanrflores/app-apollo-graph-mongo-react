@@ -14,7 +14,7 @@ const resolvers = {
             return product;
         },
         //no tengo una consulta para el parent por esos el guion bajo
-        getProduct: async(_, args) => {
+        findProduct: async(_, args) => {
             const productId = await Product.findById(args.id)
             return productId;
         },
@@ -35,10 +35,11 @@ const resolvers = {
             await Product.findByIdAndDelete(args.id)
             return "Product DELETE"
         },
-        updateProduct: async(_, args) => {
-            const ProductUpdate = await Product.findByIdAndUpdate(args.id,{
+        updateProduct: async(_, {product, id}) => {
+            //console.log(product)
+            const ProductUpdate = await Product.findByIdAndUpdate(id,{
                 //propiedad $set actualiza los campos que trae Product, es mas generico 
-                $set: args.Product
+                $set: product
             }, {new: true} );
             return ProductUpdate;
         },
