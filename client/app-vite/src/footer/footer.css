@@ -1,0 +1,48 @@
+.footerPadre {
+    font-family: 'monospace';
+    padding: 50px;
+    height: auto;
+    background-color: #212121;
+    color: rgb(255, 255, 255);
+    border-radius: 2px;
+}
+
+.footerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: medium;
+    padding: 20px;
+}
+
+.footerAbout span {
+ padding: 10px;   
+}
+
+.footerSocialRed {
+ display: flex;
+ justify-content: flex-end;
+}
+
+.divSocialRed {
+    color: rgb(189, 189, 189);
+    padding: 10px;
+  
+}
+
+.divTerms {
+    padding: 10;
+    color: gray;
+    display: flex;
+    justify-content: space-between;
+}
+
+.divTitle{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.divSubTitle {
+    display: flex; 
+    justify-content: flex-end;
+}
