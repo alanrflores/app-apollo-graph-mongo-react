@@ -1,21 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./landing.css";
 import ProductImageSlider from "../product/ProductImageSlider";
-import { productImages } from '../assets'
+import { productImages } from "../assets";
+import { useMutation, useApolloClient } from "@apollo/client";
+import { REGISTER_USER, LOGIN_USER } from "../graphql/mutation.js";
+import { useNavigate } from "react-router-dom";
+// import { useAuth } from '../useAuth/useAuth.js'
 
 const Landing = () => {
+  // const { login, loading, authToken, isAuthenticated, error} = useAuth();
+  const client = useApolloClient();
+  const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
+  const [email, setEmail] = useState("");
+  const [errors, setErrors] = useState(false);
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
+  const authToken = localStorage.getItem("token");
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (!email && !password) return;
+
+    try {
+      // await login(email, password)
+      const { data } = await loginUser({
+        variables: { loginInput: { email, password } },
+      });
+      const { token } = data.loginUser;
+      localStorage.setItem("token", token);
+      localStorage.setItem("data", JSON.stringify(data));
+      navigate("/home");
+      client.resetStore();
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  const resultStorage = localStorage.getItem("data");
+  const result = JSON.parse(resultStorage);
+ 
+  // console.log(result && result)
   return (
     <div>
       <div>
-        {
-          productImages?.length > 0 && <ProductImageSlider images={productImages} />
-        }
-      
+        {productImages?.length > 0 && (
+          <ProductImageSlider images={productImages} />
+        )}
       </div>
       <div>
-      <h1 style={{ marginTop: 50 , color: 'gray'}}>All our sneakers available.</h1>
-      <img src="https://i.pinimg.com/originals/53/4b/3d/534b3d306b597e6c19291686b5e04033.png" width='50px' heigth='50px' alt="" />
+        <h1 style={{ marginTop: 50, color: "gray" }}>
+          All our sneakers available.
+        </h1>
+        <img
+          src="https://i.pinimg.com/originals/53/4b/3d/534b3d306b597e6c19291686b5e04033.png"
+          width="50px"
+          heigth="50px"
+          alt=""
+        />
       </div>
       <div className="containerImg">
         <img
@@ -35,8 +81,10 @@ const Landing = () => {
           style={{ borderRadius: "10px" }}
         />
       </div>
-      <div className='titleReleases'>
-        <h2 style={{ fontFamily: "Futura", color: "gray", fontSize: "24px" }}>Latest releases.</h2>
+      <div className="titleReleases">
+        <h2 style={{ fontFamily: "Futura", color: "gray", fontSize: "24px" }}>
+          Latest releases.
+        </h2>
       </div>
       <div className="containerImgPar">
         <div className="divImgPar">
@@ -47,25 +95,8 @@ const Landing = () => {
             heigth="100%"
             style={{ marginRigth: "10px", borderRadius: "10px", zIndex: 1 }}
           />
-          <div className='buttonCraterImpact'>
-            <button
-              style={{
-                zIndex: 2,
-                fontSize: 12,
-                fontFamily: 'monospace',
-                position: "absolute",
-                borderRadius: 12,
-                color: "white",
-                backgroundColor: "black",
-                paddingLeft: 14,
-                paddingRight: 14,
-                paddingTop: 4,
-                paddingBottom: 4,
-             
-              }}
-            >
-              See more
-            </button>
+          <div className="divCraterbtn">
+            <button className="buttonCrater">See more</button>
           </div>
         </div>
         <h4 className="textImPar">CRATER IMPACT</h4>
@@ -87,6 +118,59 @@ const Landing = () => {
       <div className="divButton">
         <button className="buttonSeeMore">See more</button>
       </div>
+      {result 
+        ?
+          (
+           <h1 style={{ color: 'gray' , padding: 10 }}>Enjoy our products.</h1>
+          ) : (
+            <>
+            <h1 style={{ marginTop: 70, color: "gray" }}>
+              Login to see our products.
+            </h1>
+            <div className="container-form">
+              <form onSubmit={onSubmit} className="form-div">
+                {/* <input 
+            type="username" 
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)} /> */}
+                <label style={{ color: "gray" }}>Email </label>
+                <input
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  style={{
+                    margin: 4,
+                    padding: 8,
+                    borderRadius: 6,
+                    border: 0,
+                  }}
+                />
+                <label style={{ color: "gray" }}>Password </label>
+                <input
+                  type="password"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  style={{
+                    margin: 4,
+                    padding: 8,
+                    borderRadius: 6,
+                    border: 0,
+                  }}
+                />
+                <button className="buttonLogin" type="submit">
+                  Login
+                </button>
+                <div className="divError">
+                  {error && <p>{error.message}</p>}
+                </div>
+              </form>
+            </div>
+          </>
+          )
+        }
     </div>
   );
 };

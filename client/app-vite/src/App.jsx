@@ -1,14 +1,19 @@
 
 import '@fontsource/roboto/500.css';
-import { BrowserRouter, Router, Route, Routes, Outlet } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Home from './home/Home';
 import ProductForm from './product/ProductForm';
 import Landing from './landing/Landing';
 import Navbar from './navbar/Navbar';
 import Footer from './footer/Footer';
 import './App.scss'
+import ProtectedRoute from './protectedRoute/ProtectedRoute';
+import Cart from './cart/Cart';
+
+
 
 function App() {
+
 
   const routes = [
     {
@@ -29,14 +34,17 @@ function App() {
    <>
      <Navbar />
      <Routes>
-      {routes?.map(route => (
-        // console.log('route', route)
-        <Route 
-         key={route.path}
-         path={route.path}
-         element={<route.component />}
-        />
-      ))}
+      <Route path='/home' element={
+      <ProtectedRoute>
+        <Home />
+      </ProtectedRoute>
+      }/>
+      <Route path='/cart' element={
+      <ProtectedRoute>
+        <Cart />
+      </ProtectedRoute>
+      }/>
+      <Route path='/' element={<Landing />} />
       </Routes>
       <Footer />
    </>

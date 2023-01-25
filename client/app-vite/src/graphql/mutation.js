@@ -6,7 +6,12 @@ mutation($product: ProductInput){
      title
      price
      description
-     imgUrl
+     quantity
+     stock
+     images {
+      url
+      title
+    }
     }
   }
 `
@@ -17,7 +22,35 @@ mutation($updateProductId: ID!, $product: ProductInput){
       title
       price
       description
-      imgUrl
+      quantity
+      stock
+      images {
+      url
+      title
+    }
     }
   }
   `
+
+export const REGISTER_USER = gql`
+mutation($registerInput: RegisterInput){
+  registerUser(registerInput: $registerInput) {
+    username
+    email
+    password
+    token
+  }
+}
+`
+
+export const LOGIN_USER = gql`
+mutation($loginInput: LoginInput){
+  loginUser(loginInput: $loginInput) {
+    username
+    email
+    password
+    token
+    role
+  }
+}
+`

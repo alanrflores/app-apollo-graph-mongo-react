@@ -73,11 +73,26 @@
 
 .buttonSeeMore{
     font-family: 'monospace';
-    font-size: large;
+    font-size: medium;
     border-radius: 40px;
+    border: none;
     background-color: black;
     color: white;
-    padding: 4px 20px 4px 20px;
+    padding: 4px 30px 4px 30px;
+    text-align: center;
+}
+.buttonSeeMore:hover{
+   background-color: rgb(55, 55, 55);
+}
+
+.buttonCrater {
+    font-family: 'monospace';
+    font-size: medium;
+    border-radius: 40px;
+    border: none;
+    background-color: black;
+    color: white;
+    padding: 4px 30px 4px 30px;
     text-align: center;
 }
 
@@ -87,13 +102,43 @@
     padding: 10px;
     
 }
-.buttonCraterImpact {
-    padding: 10px;
-    margin-right: 520px;
-}
+
 
 .futura-text {
     font-family: 'Futura', sans-serif;
+  }
+
+  .container-form {
+      display: flex;
+      justify-content: center;
+      padding: 30px;
+  }
+
+  .form-div {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      padding: 10px;
+      width: 300px;
+  }
+
+  .buttonLogin {
+    width: 60px;
+    border-radius: 6px;
+    border: none;
+    background-color: 'cream'; 
+    padding: 8px;
+    margin-left: 104px;
+    margin-top: 6px;
+  }
+
+  .buttonLogin:hover {
+      background-color:antiquewhite;
+  }
+
+  .divError {
+      margin-top: 20px;
+      color: red;
   }
 
  

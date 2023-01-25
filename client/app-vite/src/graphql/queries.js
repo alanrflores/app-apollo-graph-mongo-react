@@ -7,7 +7,12 @@ id
 title
 price
 description
-imgUrl
+quantity
+stock
+images {
+      url
+      title
+    }
 }
 }
 `
@@ -19,7 +24,12 @@ query($findProductId: ID){
     title
     price
     description
-    imgUrl
+    quantity
+    stock
+    images {
+      url
+      title
+    }
   }
 }
 `

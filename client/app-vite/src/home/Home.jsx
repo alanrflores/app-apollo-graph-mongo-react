@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ALL_PRODUCT } from '../graphql/queries';
 import AllProduct from '../product/AllProduct';
 import ProductForm from '../product/ProductForm';
@@ -15,6 +15,20 @@ const Home = () => {
         setErrorMessage(null)
       },5000)
     };
+
+    //se desplaza a la parte superior de la pagina
+  const goToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+  useEffect(() => {
+    goToTop();
+  }, []);
+
+    const resultStorage = localStorage.getItem("data");
+    const dataStorage = JSON.parse(resultStorage);
   return (
     <div>
       <Notify error={errorMessage}/>
@@ -25,7 +39,6 @@ const Home = () => {
         ) : (
             <>
             <AllProduct products={data?.getAllProduct} />
-            <ProductForm setError={notify}/> 
             </>
             )
       } 

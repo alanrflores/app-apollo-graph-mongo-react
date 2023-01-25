@@ -1,0 +1,48 @@
+.container-product-detail {
+    margin-top: 60px;
+
+    .swiper-product {
+        background-image: url('https://www.jordan.com/collection/content/dam/jordan/air-jordan-collection/images/bgplates/c-bg.jpg');
+     .btn-buy {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+    
+    }
+    }
+
+    .div-container-title {
+     padding: 20px;
+     margin-top: 10px;
+     display: flex;
+     justify-content: space-around;
+     h2{
+         letter-spacing: 4px;
+         font-size: 30px;
+         font-weight: bold;
+ 
+     }
+    .div-description {
+     padding: 15px;
+     display: flex;
+    flex-direction: column;
+        span {
+         color: gray;   
+         font-weight: bold;   
+         padding: 6px;
+         margin-top: 4px;
+        }
+        label {
+         font-weight: bold;   
+        }
+        p {
+         color: gray;
+         font-weight: bold;
+         padding: 6px;
+         margin-top: 4px;
+         width: 310px;
+        }
+    }
+
+    }
+}

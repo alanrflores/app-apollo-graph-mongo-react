@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useContext} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -10,19 +10,24 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { createTheme, Menu, ThemeProvider } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../useAuth/useAuth';
+import { CartContext } from '../context/CartContextProvider';
+import './navbar.scss'
 
 
 const pages = [{name:'Products', path: '/home'}, {name:'Blog', path: '/blog'}];
-
-
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Logout'];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const { logout } = useAuth();
+  const { cart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -33,10 +38,14 @@ function Navbar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+    
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    logout();
+    navigate('/')
+    
   };
   const darkTheme = createTheme({
     palette: {
@@ -46,6 +55,10 @@ function Navbar() {
       },
     },
   });
+
+  const authLocal = localStorage.getItem('data');
+  const isAuthenticated = JSON.parse(authLocal);
+
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -135,7 +148,7 @@ function Navbar() {
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {authLocal && pages.map((page) => (
               <Button
                 key={page.name}
                 onClick={handleCloseNavMenu}
@@ -147,7 +160,12 @@ function Navbar() {
               </Button>
             ))}
           </Box>
-
+          <Box sx={{ flexGrow: 0.1 }}>
+            <Link to={'/cart'}>
+             <ShoppingCartIcon className='shopping-cart' />
+             { cart.length > 0 && <span style={{ color: 'black', padding: 1, fontSize: 12, fontWeigth: 10, fontFamily: 'monospace' }}>{cart.length}</span>}
+            </Link>
+          </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -176,6 +194,7 @@ function Navbar() {
                 </MenuItem>
               ))}
             </Menu>
+            
           </Box>
         </Toolbar>
       </Container>
