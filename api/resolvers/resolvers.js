@@ -18,18 +18,42 @@ const resolvers = {
             const productId = await Product.findById(args.id)
             return productId;
         },
+       getAllUser: async(_,) => {
+            const userAll = await User.find()
+            return userAll;
+       },
        user: async(_, args) => {
           const userId = await User.findById(args.id)
           return userId;
         },
+        userData: async(parent, args, context) => {
+            console.log('context', context)
+            if(!context.user) {
+              throw new Error('Not authenticated');
+            }
+            const data = getUserData();
+            return data;
+        },
+        adminData: async(root, args, context) => {
+           if(!context.user || !context.user.role === 'ADMIN') {
+                throw new Error('Error Unauthorized');
+           }
+           const data = getAdminData();
+           return data;
+        },
     },
     Mutation: {
+        
         createProduct: async(_, args) => {
-            const { title, price, imgUrl, description } = args.product;
-            const newProduct = new Product({title, price, imgUrl, description})
-            console.log(newProduct); 
-            await newProduct.save();
-            return newProduct;
+            const { title, price, description, quantity, stock, images } = args.product;
+             try {
+                const newProduct = new Product({title, price, description, quantity, stock, images})
+                console.log(newProduct); 
+                const savedProduct = await newProduct.save();
+                return savedProduct;
+            } catch (error) {
+                throw new Error(error);
+            }
         },
         deleteProduct: async(_, args) => {
             await Product.findByIdAndDelete(args.id)
@@ -43,7 +67,11 @@ const resolvers = {
             }, {new: true} );
             return ProductUpdate;
         },
-        registerUser: async(_, {registerInput: {username, email, password} }) => {
+        updateRole: async(_, {role, id}) => {
+          const roleUpdate = await User.findByIdAndUpdate(id, {role},{new: true});
+          return roleUpdate;
+        },
+        registerUser: async(_, {registerInput: {username, email, password, role } }) => {
             const oldUser = await User.findOne({ email })
             if(oldUser){
                 throw new Error('A user is already registered with the email' + email)
@@ -53,7 +81,8 @@ const resolvers = {
             const newUser = new User({
                   username: username,
                   email: email,
-                  password: hashed
+                  password: hashed,
+                  role: role
               });
 
               const token = jwt.sign({ id: newUser._id, email} , process.env.JWT_SECRET, {

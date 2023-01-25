@@ -10,13 +10,21 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@graphql-tools/schema": "^9.0.12",
     "apollo-server-express": "^3.11.1",
+    "aws-appsync-auth-link": "^3.0.7",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "express-jwt": "^8.2.1",
     "graphql": "^16.6.0",
+    "graphql-tools": "^8.3.14",
     "jsonwebtoken": "^8.5.1",
+    "mercadopago": "^1.5.14",
     "mongoose": "^6.8.0",
+    "ngrok": "^4.3.3",
     "nodemon": "^2.0.20"
   }
 }
