@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartContextProvider";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "./cart.scss";
+import { CREATE_PAYMENT } from "../graphql/mutation";
+import { useMutation } from "@apollo/client";
+
 
 const Cart = () => {
   const { cart, total, clearItem } = useContext(CartContext);
- 
+  const [createPayment, { data }] = useMutation(CREATE_PAYMENT);
+
 
   //se desplaza a la parte superior de la pagina
   const goToTop = () => {
@@ -18,17 +22,30 @@ const Cart = () => {
   useEffect(() => {
     goToTop();
   }, []);
- const data = localStorage.getItem('dataCart');
- const prod = JSON.parse(data);
-console.log(prod)
- const isMercadoPago = async() => {
+
+ const result = localStorage.getItem('dataCart');
+ const prod = JSON.parse(result);
+
+
+
+ const handleSubmit = async(productId, quantity) => {
+   try {
+
+     const { data } = await createPayment({ variables: { productId , quantity }});
+     const { payment } = data;
+    //  const payment = await create.payment.get(id);
+    //  console.log('id', payment.id)
+     console.log('data', data.createPayment)
+     window.location.href = data.createPayment.init_point;
+  
+   } catch (error) {
+     console.log(error.message)
+   }
+ };
  
-     fetch('http://localhost:3000/create-payment', prod)
-     .then(res =>  res.json())
-     .then(data => console.log(data))
-     .catch(error => console.log(error))
- }
-//window.location.href = data.init_point
+
+
+
   return (
     <div>
       <div className="container-cart">
@@ -45,7 +62,14 @@ console.log(prod)
         ) : (
           cart?.map((item, index) => {
             const findImage = item?.images?.find((firstImg) => firstImg);
-            // console.log("find", findImage);
+
+            let itemQuantity = item.quantity
+            let quantityInt = parseInt(itemQuantity, 10);
+            let newItem = {
+              ...item,
+              quantity: quantityInt
+            };
+            
             console.log("item", item);
             return (
               <div key={index} className="cart-product">
@@ -53,21 +77,21 @@ console.log(prod)
                   <img src={findImage.url} alt="image-not-found" />
                   <div className="cart-description">
                     <div className="cart-div">
-                      <h2>{item.title}</h2>
-                      <span>USD {item.price}</span>
+                      <h2>{newItem.title}</h2>
+                      <span>USD {newItem.price}</span>
                     </div>
                     <div style={{ padding: 6 }}>
-                      <span style={{ color: 'gray'}}>Quantity: {item.quantity}</span>
+                      <span style={{ color: 'gray'}}>Quantity: {newItem.quantity}</span>
                       <hr />
                     </div>
 
                     <div className="icon-div">
                       <DeleteIcon
                         className="delete-icon"
-                        onClick={() => clearItem(item.id)}
+                        onClick={() => clearItem(newItem.id)}
                       />
                     </div>
-                    <button onClick={()=> isMercadoPago()}>Confirm</button>
+                    <button onClick={()=> handleSubmit(newItem.id, newItem.quantity)}>Confirm</button>
                   </div>
                 </div>
               </div>

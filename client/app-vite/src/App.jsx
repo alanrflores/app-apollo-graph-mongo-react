@@ -9,6 +9,7 @@ import Footer from './footer/Footer';
 import './App.scss'
 import ProtectedRoute from './protectedRoute/ProtectedRoute';
 import Cart from './cart/Cart';
+import Success from './success/Success';
 
 
 
@@ -23,11 +24,11 @@ function App() {
    {
      path: '/home',
      component: Home
-   },
+  },
    {
     path: '/about',
     component: ProductForm
-  }
+  },
   ];
    
   return (
@@ -43,6 +44,11 @@ function App() {
       <ProtectedRoute>
         <Cart />
       </ProtectedRoute>
+      }/>
+      <Route path='/success' element={
+       <ProtectedRoute>
+         <Success />
+       </ProtectedRoute>
       }/>
       <Route path='/' element={<Landing />} />
       </Routes>

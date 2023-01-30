@@ -69,7 +69,7 @@ const AllProduct = ({ products }) => {
         {
             products?.map(p => 
                 <div key={p.id} onClick={() => showProduct(p.id)} style={{color: 'violet'}}>
-                  <img src={p?.images[0]?.url} alt="product-image" width='180px' height='180px' />
+                  <img src={p?.images[0]?.url} alt="product-image" width='260px' height='180px' />
                   <h3 style={{ color: 'black', fontWeight: 'bolder', fontSize: 12, fontFamily: 'monospace' }}>{p.title}</h3>
                 </div>  
             )

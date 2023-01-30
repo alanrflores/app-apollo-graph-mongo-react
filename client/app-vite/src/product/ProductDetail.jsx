@@ -23,10 +23,11 @@ const ProductDetail = ({product}) => {
   useEffect(() => {
     goToTop();
   }, []);
-
+  
+ 
   let item = product && {
     ...product,
-    quantity,
+    quantity
   };
 
   const byAddingCart = () => {
