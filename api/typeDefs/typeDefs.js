@@ -42,24 +42,39 @@ type Image {
    title: String!
    price: String!
    description: String!
-   quantity: String!
+   quantity: Int!
    stock: String!
    images: [Image]
+   paymentId: ID
  }
+
+
+ type Payment {
+    id: ID
+    init_point: String
+    operation_type: String     
+}
 
 input ImageInput {
   url: String!
   title: String!
 }
  
+# input CardInput {
+#     card_number: String!
+#     expiration_month: String!
+#     expiration_year: String!
+#     security_code: String!
+#     cardholder_name: String!
+# }
+
 input ProductInput {
    title: String!
    price: String!
    description: String!
-   quantity: String!
+   quantity: Int!
    stock: String!
    images: [ImageInput]
-   
  }
 
  type Data {
@@ -83,6 +98,7 @@ input ProductInput {
    deleteProduct(id: ID!): String
    updateProduct(id: ID!, product: ProductInput ) : Product
    updateRole(id: ID!, role: Role = USER) : User 
+   createPayment(productId: ID!, quantity: Int! ) : Payment
    registerUser(registerInput: RegisterInput, role: Role) : User
    loginUser(loginInput: LoginInput) : User
 

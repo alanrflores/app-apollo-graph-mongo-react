@@ -4,6 +4,11 @@ const Product = require("../models/Product");
 const User = require("../models/User");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const mercadopago = require('mercadopago');
+
+
+//configure the SDK
+mercadopago.configure({ access_token: process.env.MP_ACCESS_KEY});
 
 
 const resolvers = {
@@ -71,6 +76,38 @@ const resolvers = {
           const roleUpdate = await User.findByIdAndUpdate(id, {role},{new: true});
           return roleUpdate;
         },
+
+        createPayment: async(_, args , context) => {
+          console.log('context', context)
+          try {
+            const product = await Product.findById(args.productId);  
+            const payment = await mercadopago.preferences.create({
+                back_urls: {
+                    success: 'http://localhost:5173/success',
+                    failure: '',
+                    pending: '',
+                 },
+                items: [
+                    {   
+                        transaction_amount: product?.price * args.quantity,
+                        title: product?.title,
+                        description: product?.description,
+                        quantity: args.quantity,
+                        currency_id: 'USD',
+                        unit_price: product?.price
+                    }
+                ],
+                payer: {
+                    email: context?.user?.email,
+                 },
+            });
+            console.log('payment', payment.body)
+            return payment.body;
+          } catch (error) {
+            throw new Error(error)
+          } 
+        },
+
         registerUser: async(_, {registerInput: {username, email, password, role } }) => {
             const oldUser = await User.findOne({ email })
             if(oldUser){

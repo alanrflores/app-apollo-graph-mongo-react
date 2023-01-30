@@ -1,3 +1,6 @@
+//esto apenas arranque la aplicación va a leer el archivo .env
+require('dotenv').config();
+
 const { connect } = require('mongoose');
 const mongoose = require("mongoose");
 
@@ -10,6 +13,5 @@ const connectDb = async () => {
       console.error(error)  
     }
 };
-
 
 module.exports =  { connectDb };
