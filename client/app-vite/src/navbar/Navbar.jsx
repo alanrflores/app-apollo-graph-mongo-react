@@ -14,7 +14,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { createTheme, Menu, ThemeProvider } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../useAuth/useAuth';
+import { UseAuth } from '../useAuth/UseAuth';
 import { CartContext } from '../context/CartContextProvider';
 import './navbar.scss'
 
@@ -25,7 +25,7 @@ const settings = ['Logout'];
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const { logout } = useAuth();
+  const { logout } = UseAuth();
   const { cart } = useContext(CartContext);
   const navigate = useNavigate();
 
@@ -67,10 +67,10 @@ function Navbar() {
         <Toolbar disableGutters>
             <div>
                 <img 
-                  src="https://i.pinimg.com/736x/39/58/eb/3958eb518fea283ff3446e3d80acd35f.jpg" 
+                  src="https://static.nike.com/a/images/63f92881-8607-44b9-a4f8-e6b491c23702/white-light-grey-cobalt.png" 
                   alt="png-sneaker" 
-                  width='50px' 
-                  height='50px' 
+                  width='95px' 
+                  height='65px' 
                   style={{ borderRadius: 20 }} />
             </div>
           <Typography
@@ -89,7 +89,7 @@ function Navbar() {
               padding: 2,
             }}
           >
-            SNEAKERS
+            SNKRS
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -145,7 +145,6 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {authLocal && pages.map((page) => (
@@ -167,11 +166,16 @@ function Navbar() {
             </Link>
           </Box>
           <Box sx={{ flexGrow: 0 }}>
+            {
+              isAuthenticated && (
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} >
+                <Avatar alt="Remy Sharp" src={ authLocal ? isAuthenticated?.loginUser?.avatar : "/static/images/avatar/2.jpg"} />
               </IconButton>
             </Tooltip>
+
+              )
+            }
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"

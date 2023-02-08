@@ -19,7 +19,7 @@ const ProductImageSlider = props => {
      useEffect(()=> {
          const set = setTimeout(() => {
              setShowBackground(true)
-          },3000);
+          },1000);
      }, []);
     
 

@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { CREATE_PRODUCT } from "../graphql/mutation";
-import { ALL_PRODUCT } from "../graphql/queries";
+import { CREATE_PRODUCT } from "../../graphql/mutation";
+import { ALL_PRODUCT } from "../../graphql/queries";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContentText from "@mui/material/DialogContentText";
-import "./product-form.scss";
 import isValidUrl from 'valid-url';
+import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import "./product-form.scss";
+
+
 
 const ProductForm = ({ setError }) => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [quantity, setQuantity] = useState("");
+  const [quantity, setQuantity] = useState(1);
   const [stock, setStock] = useState("");
   const [images, setImages] = useState([{ url: "", title: ""}]);
   const [open, setOpen] = useState(false);
+  
+  const navigate = useNavigate();
+
+  let quantityInt = parseInt(quantity, 10);
 
   const [createProduct, { data }] = useMutation(CREATE_PRODUCT, {
     refetchQueries: [{ query: ALL_PRODUCT }],
@@ -26,7 +34,10 @@ const ProductForm = ({ setError }) => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    if(!title || !price || !description || !quantity || !stock ) return alert('Fill in the fields');
+    if(!title || !price || !description || !stock ) 
+    return toast('Fill in the fields', {
+    duration: 3000,
+    });
 
     const invalidUrls = images.filter(image => !isValidUrl.isUri(image.url));
 
@@ -39,13 +50,33 @@ const ProductForm = ({ setError }) => {
 
      const response = await createProduct({ variables: { product: { title, price, description, quantity, stock, images }}});
      if(response){
-           setTitle("");
-           setPrice("");
-           setDescription("");
-           setQuantity("");
-           setStock("");
-           setImages([{ url: "", title: ""}]);
-     }
+            toast.success('Successfully product created!', {
+              duration: 3000,
+              position: 'top-center',
+              icon: '👏',
+              style: {
+                borderRadius: '8px',
+                background: '#333',
+                color: '#fff',
+              },
+            });
+          }else{
+            toast.error('Please complete the fields correctly',{
+              duration: 3000,
+              position: 'top-center',
+              style: {
+                borderRadius: '8px',
+                background: '#333',
+                color: '#fff',
+              },
+            });
+          };
+          setTitle("");
+          setPrice("");
+          setDescription("");
+          setStock("");
+          setImages([{ url: "", title: ""}]);
+          navigate('/home')
    } catch (error) {
      console.log(error);
    }
@@ -59,7 +90,6 @@ const ProductForm = ({ setError }) => {
     setOpen(false);
   };
 
-  if (data) return <p style={{ color: "green" }}>Create Succesfully!</p>;
 
   return (
     <div className="container-create-product">
@@ -253,10 +283,12 @@ const ProductForm = ({ setError }) => {
                 >
                   Add product
                 </button>
+                <Toaster />
             </div>
           </div>
         </form>
       </Dialog>
+      <Toaster />
     </div>
   );
 };

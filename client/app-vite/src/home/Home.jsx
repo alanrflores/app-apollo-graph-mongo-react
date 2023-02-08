@@ -1,22 +1,18 @@
-import { useQuery } from '@apollo/client';
-import React, { useEffect, useState } from 'react'
-import { ALL_PRODUCT } from '../graphql/queries';
-import AllProduct from '../product/AllProduct';
-import ProductForm from '../product/ProductForm';
+import React, { useEffect, useState } from "react";
+import { useQuery } from "@apollo/client";
+import AllProduct from "../product/allProduct/AllProduct";
+import { ALL_PRODUCT } from "../graphql/queries";
+import ReactLoading from 'react-loading';
+import "./home.scss";
 
 const Home = () => {
-    const {data, error, loading} = useQuery(ALL_PRODUCT);
-    const [errorMessage, setErrorMessage] = useState(null);
-  
-  
-    const notify = (message) => {
-      setErrorMessage(message)
-      setTimeout(() => {
-        setErrorMessage(null)
-      },5000)
-    };
+  const { data, error, loading } = useQuery(ALL_PRODUCT);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemPerPage = 9;
+  const lastItem = currentPage * itemPerPage;
+  const firstItem = lastItem - itemPerPage;
 
-    //se desplaza a la parte superior de la pagina
+  //se desplaza a la parte superior de la pagina
   const goToTop = () => {
     window.scrollTo({
       top: 0,
@@ -27,33 +23,27 @@ const Home = () => {
     goToTop();
   }, []);
 
-    const resultStorage = localStorage.getItem("data");
-    const dataStorage = JSON.parse(resultStorage);
-  return (
-    <div>
-      <Notify error={errorMessage}/>
-      <header>
-      {
-        loading ? (
-          <h1>Loading...</h1>
-        ) : (
-            <>
-            <AllProduct products={data?.getAllProduct} />
-            </>
-            )
-      } 
-      </header>
-    </div>
-  )
-};
+  const currentItems = data?.getAllProduct?.slice(firstItem, lastItem);
 
-const Notify = ({error}) => {
-    if(!error) return null
-    return (
-        <div style={{ color: 'red' , position: 'fixed', top: 0, width: '100%' }}>
-            {error}
-        </div>
-    )
+  const paginated = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
-export default Home
+  if (loading) {
+    return <div className="container-loading">
+              <ReactLoading type={"spokes"} color={"black"} height={40} width={40} />
+           </div>;
+  }
+  return (
+    <>
+              <AllProduct
+                products={currentItems}
+                itemPerPage={itemPerPage}
+                paginated={paginated}
+                items={data?.getAllProduct?.length}
+              />
+     </>
+  );
+};
+
+export default Home;

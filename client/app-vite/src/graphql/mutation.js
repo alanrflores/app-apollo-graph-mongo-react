@@ -17,11 +17,22 @@ mutation($product: ProductInput){
 `
 
 export const CREATE_PAYMENT = gql`
-mutation($productId: ID! , $quantity: Int!){
-  createPayment(productId: $productId , quantity: $quantity) {
+mutation($productIds: [ID!], $quantities: [Int!]){
+  createPayment (productIds: $productIds, quantities: $quantities){
     id
     init_point
+    productIds
+    quantities
     operation_type
+    items {
+      title
+      description
+      quantity
+      unit_price
+    }
+    payer {
+      email
+    }
   }
 }
 `
@@ -42,14 +53,22 @@ mutation($updateProductId: ID!, $product: ProductInput){
   }
   `
 
+export const UPDATE_PRODUCT_STOCK = gql`
+mutation($updateProductStockId: ID!, $stock: String){
+  updateProductStock(id: $updateProductStockId, stock: $stock) {
+    id
+    stock
+  }
+}
+`
 
 
 export const REGISTER_USER = gql`
-mutation($registerInput: RegisterInput){
-  registerUser(registerInput: $registerInput) {
+mutation($registerInput: RegisterInput, $role: Role){
+  registerUser(registerInput: $registerInput, role: $role) {
+    avatar
     username
     email
-    password
     token
   }
 }
@@ -64,6 +83,7 @@ mutation($loginInput: LoginInput){
     password
     token
     role
+    avatar
   }
 }
 `

@@ -1,50 +1,24 @@
-import React, { useEffect, useState } from "react";
-import "./landing.css";
-import ProductImageSlider from "../product/ProductImageSlider";
+import React, { useEffect } from "react";
+import ProductImageSlider from "../product/productImageSlider/ProductImageSlider";
 import { productImages } from "../assets";
-import { useMutation, useApolloClient } from "@apollo/client";
-import { REGISTER_USER, LOGIN_USER } from "../graphql/mutation.js";
-import { useNavigate } from "react-router-dom";
-// import { useAuth } from '../useAuth/useAuth.js'
+import { Link } from "react-router-dom";
+import Register from "../user/register/Register";
+import "./landing.css";
+import Login from "../user/login/Login";
+import { UseAuth } from "../useAuth/UseAuth.jsx";
 
 const Landing = () => {
-  // const { login, loading, authToken, isAuthenticated, error} = useAuth();
-  const client = useApolloClient();
-  const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
-  const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState(false);
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-
-  const authToken = localStorage.getItem("token");
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    if (!email && !password) return;
-
-    try {
-      // await login(email, password)
-      const { data } = await loginUser({
-        variables: { loginInput: { email, password } },
-      });
-      const { token } = data.loginUser;
-      localStorage.setItem("token", token);
-      localStorage.setItem("data", JSON.stringify(data));
-      navigate("/home");
-      client.resetStore();
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  const resultStorage = localStorage.getItem("data");
-  const result = JSON.parse(resultStorage);
+  // const client = useApolloClient();
+  const { userData, setUserData } = UseAuth();
+  const result = JSON.parse(localStorage.getItem("data"));
  
-  // console.log(result && result)
+
+  useEffect(() => {
+  result && setUserData(result)
+  },[userData]);
+  
+
+
   return (
     <div>
       <div>
@@ -111,66 +85,38 @@ const Landing = () => {
         </div>
       </div>
       <div className="containerTitle">
-        <h2 style={{ fontFamily: "Futura", color: "gray", fontSize: "24px" }}>
+        <h2 style={{ fontFamily: "Futura", color: "gray", fontSize: 24 }}>
           The ideal place for your Sneakers.
         </h2>
       </div>
       <div className="divButton">
-        <button className="buttonSeeMore">See more</button>
+        <Link to="/home">
+          <button className="buttonSeeMore">See more</button>
+        </Link>
       </div>
-      {result 
-        ?
-          (
-           <h1 style={{ color: 'gray' , padding: 10 }}>Enjoy our products.</h1>
-          ) : (
-            <>
-            <h1 style={{ marginTop: 70, color: "gray" }}>
-              Login to see our products.
-            </h1>
-            <div className="container-form">
-              <form onSubmit={onSubmit} className="form-div">
-                {/* <input 
-            type="username" 
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)} /> */}
-                <label style={{ color: "gray" }}>Email </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  style={{
-                    margin: 4,
-                    padding: 8,
-                    borderRadius: 6,
-                    border: 0,
-                  }}
-                />
-                <label style={{ color: "gray" }}>Password </label>
-                <input
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  style={{
-                    margin: 4,
-                    padding: 8,
-                    borderRadius: 6,
-                    border: 0,
-                  }}
-                />
-                <button className="buttonLogin" type="submit">
-                  Login
-                </button>
-                <div className="divError">
-                  {error && <p>{error.message}</p>}
-                </div>
-              </form>
-            </div>
-          </>
-          )
-        }
+      {result ? (
+        <h1 style={{ color: "gray", padding: 30, fontFamily: "futura" }}>
+          Hi, {userData?.loginUser?.username} enjoy our products.
+        </h1>
+      ) : (
+        <>
+          <h1
+            style={{
+              marginTop: 60,
+              color: "gray",
+              padding: 20,
+              fontFamily: "Futura",
+              fontSize: 24,
+            }}
+          >
+            Login to see our products.
+          </h1>
+          <div className="container-form">
+            <Login />
+            <Register />
+          </div>
+        </>
+      )}
     </div>
   );
 };

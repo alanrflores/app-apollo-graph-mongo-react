@@ -1,29 +1,50 @@
-import { useMutation } from "@apollo/client";
+import { useLazyQuery, useMutation } from "@apollo/client";
 import React, { useState } from "react";
-import { UPDATE_PRODUCT } from "../graphql/mutation";
-import { ALL_PRODUCT } from "../graphql/queries";
+import { UPDATE_PRODUCT } from "../../graphql/mutation";
+import { ALL_PRODUCT, FIND_PRODUCT } from "../../graphql/queries";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContentText from "@mui/material/DialogContentText";
-import "./product-form.scss";
 import isValidUrl from "valid-url";
+import toast, { Toaster } from 'react-hot-toast';
+import "../productForm/product-form.scss";
 
-const UpdateProductForm = ({ productId }) => {
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [stock, setStock] = useState("");
-  const [images, setImages] = useState([{ url: "", title: "" }]);
+const UpdateProductForm = ({ productId, product }) => {
+  const url = product?.images?.map((item) => item.url);
+  // console.log(url[0])
+  const titleImage = product.images.map((item) => item.title);
+
+  const [title, setTitle] = useState(product.title);
+  const [price, setPrice] = useState(product.price);
+  const [description, setDescription] = useState(product.description);
+  const [quantity, setQuantity] = useState(product.quantity);
+  const [stock, setStock] = useState(product.stock);
+  const [images, setImages] = useState([
+    { 
+    url: url[0],  
+    title: titleImage[0] 
+    }, 
+    {
+      url: url[1],
+      title: titleImage[1]
+    },
+]);
+  const [img, setImg] = useState([{ url: "" , title: "" }])
   const [open, setOpen] = useState(false);
 
+  const quantityInt = parseInt(quantity, 10);
+  
   const [updateProduct, { data, loading }] = useMutation(UPDATE_PRODUCT, {
     refetchQueries: [{ query: ALL_PRODUCT }],
   });
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title || !price || !description || !quantity || !stock ) return;
+    if (!title || !price || !description || !stock ) 
+      return toast('Fill in the fields', {
+      duration: 3000,
+      });
 
     const invalidUrls = images.filter((image) => !isValidUrl.isUri(image.url));
 
@@ -42,16 +63,37 @@ const UpdateProductForm = ({ productId }) => {
         },
       });
       if (response) {
-        return <p style={{ color: "green" }}>Update Succesfully!</p>;
-      }
+        toast.success('Update product!', {
+          duration: 3000,
+          position: 'top-center',
+          icon: '👏',
+          style: {
+            borderRadius: '8px',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+      }else{
+        toast.error('Please complete the fields correctly',{
+          duration: 3000,
+          position: 'top-center',
+          style: {
+            borderRadius: '8px',
+            background: '#333',
+            color: '#fff',
+          },
+        });
+      };
+          setTitle("");
+          setPrice("");
+          setDescription("");
+          setStock("");
+          setImages([{ url: "", title: ""}]);
     } catch (error) {
       console.log(error);
     }
-    //  setTitle('')
-    //  setPrice('')
-    //  setDescription('')
-    //  setImages([{ url: "", title: ""}]);
   };
+  
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -60,9 +102,14 @@ const UpdateProductForm = ({ productId }) => {
     setOpen(false);
   };
 
+  const filterImage = product?.images?.map((image) => image?.url)
+  console.log('filter', filterImage)
+  
+   const handleDelete = (item) => {
+    setImages(filterImage !== item)
+   };
+  // console.log('images',images?.map((item) => item))
   if (loading) return <p>Loading...</p>;
-
-  // if(data) return <p style={{ color: 'green'}}>Update Succesfully!</p>
 
   return (
     <div className="container-create-product">
@@ -151,7 +198,7 @@ const UpdateProductForm = ({ productId }) => {
               }}
               type="quantity"
               placeholder="quantity"
-              value={quantity}
+              value={quantityInt}
               onChange={(e) => setQuantity(e.target.value)}
             />
              <input
@@ -170,12 +217,13 @@ const UpdateProductForm = ({ productId }) => {
             />
             <label style={{ marginTop: 6, color: "gray" }}>
               Images
+             
               {images?.map((image, index) => (
                 <div key={index}>
                   <input
                     type="text"
                     placeholder="url"
-                    value={images.url}
+                    value={image.url}
                     onChange={(e) =>
                       setImages(
                         images?.map((item, i) =>
@@ -194,7 +242,7 @@ const UpdateProductForm = ({ productId }) => {
                   <input
                     type="text"
                     placeholder="title"
-                    value={images.title}
+                    value={image.title}
                     onChange={(e) =>
                       setImages(
                         images?.map((img, i) =>
@@ -269,10 +317,13 @@ const UpdateProductForm = ({ productId }) => {
                 >
                   Update product
                 </button>
+                <Toaster />
             </div>
           </div>
         </form>
+       
       </Dialog>
+      <Toaster />
     </div>
   );
 };

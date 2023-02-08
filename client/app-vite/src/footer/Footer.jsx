@@ -4,10 +4,11 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import FmdGoodIcon from '@mui/icons-material/FmdGood';
+import FmdGoodIcon from "@mui/icons-material/FmdGood";
 
 const Footer = () => {
   return (
+    <div className="div-footer">
     <div className="footerPadre">
       <div className="footerContainer">
         <div className="footerRegister">
@@ -35,17 +36,21 @@ const Footer = () => {
       </div>
       <div className="divTerms">
         <div className="divTitle">
-          <span style={{ marginLeft: 10 , padding: 2, color: 'white' }}> <FmdGoodIcon /> Argentina</span>  
-          <span style={{ marginLeft: 10 , padding: 10 }}>
-            © 2022 Sneakers, Inc. All rights reserved.
+          <span style={{ marginLeft: 10, padding: 2, color: "white" }}>
+            {" "}
+            <FmdGoodIcon /> Argentina
           </span>
-          </div>
-          <div className="divSubTitle">
-            <span style={{ marginRight: 20 ,padding: 10 }}>Terms of use</span>
-            <span style={{ marginRight: 20 , padding: 10 }}>Privacy Policy</span>
-          </div>
+          <span style={{ marginLeft: 10, padding: 10 }}>
+            © 2023 SNKRS, Inc. All rights reserved.
+          </span>
+        </div>
+        <div className="divSubTitle">
+          <span style={{ marginRight: 20, padding: 10 }}>Terms of use</span>
+          <span style={{ marginRight: 20, padding: 10 }}>Privacy Policy</span>
         </div>
       </div>
+    </div>
+    </div>
   );
 };
 

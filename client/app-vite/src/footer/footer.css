@@ -1,18 +1,25 @@
+.div-footer {
+   height: 100%;
+}
 .footerPadre {
     font-family: 'monospace';
     padding: 50px;
-    height: auto;
+    height: 100%;
     background-color: #212121;
     color: rgb(255, 255, 255);
     border-radius: 2px;
+   
+    
+
 }
 
 .footerContainer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: medium;
-    padding: 20px;
+    align-self: flex-end;
+    font-size: small;
+    padding: 40px;
 }
 
 .footerAbout span {

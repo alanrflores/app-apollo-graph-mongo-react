@@ -1,11 +1,14 @@
+
+import React , { useState } from "react";
 import { useApolloClient, useMutation } from "@apollo/client";
 import { getTypenameFromResult } from "@apollo/client/utilities";
 import { LOGIN_USER } from "../graphql/mutation";
 
 
-export function useAuth() {
+export function UseAuth() {
 const client = useApolloClient();
 const [loginUser, { data, loading, error}] = useMutation(LOGIN_USER);
+const [userData, setUserData] = useState(null);
 
 const authToken = localStorage.getItem('token');
 
@@ -27,6 +30,7 @@ async function login(email, password) {
 function logout(){
     localStorage.removeItem('token')
     localStorage.removeItem('data')
+    setUserData(null);
     client.resetStore();
 
 }
@@ -36,6 +40,8 @@ return {
     loading: loading,
     authToken,
     error: error,
+    userData,
+    setUserData,
     isAuthenticated,
     login,
     logout,

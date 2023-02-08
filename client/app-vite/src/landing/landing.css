@@ -112,13 +112,17 @@
       display: flex;
       justify-content: center;
       padding: 30px;
+      border-radius: 10px;
+      border: solid 1px #EBF5FB;
+      margin: 40px;
+    
   }
 
   .form-div {
       display: flex;
       justify-content: center;
       flex-direction: column;
-      padding: 10px;
+      padding: 20px;
       width: 300px;
   }
 
@@ -128,14 +132,17 @@
     border: none;
     background-color: 'cream'; 
     padding: 8px;
-    margin-left: 104px;
+    margin-left: 100px;
     margin-top: 6px;
   }
 
   .buttonLogin:hover {
-      background-color:antiquewhite;
+      background-color:rgb(207, 207, 207);
   }
-
+ .divRegister{
+    margin-top: 10px;
+    padding: 8px;
+ }
   .divError {
       margin-top: 20px;
       color: red;

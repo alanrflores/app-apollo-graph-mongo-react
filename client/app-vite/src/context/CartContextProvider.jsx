@@ -1,11 +1,12 @@
 import React, { createContext, useState , useEffect} from 'react'
 import { checkExistInTheCart } from '../check/check';
+import toast, { Toaster } from 'react-hot-toast';
 
 export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [products, setProducts] = useState(null);
+  const [products, setProducts] = useState([]);
   const [total, setTotal] = useState([]);
 
   useEffect(() => {
@@ -30,12 +31,29 @@ const CartContextProvider = ({ children }) => {
   const addItem = (item) => {
    if(checkExistInTheCart(cart, item)){
     setCart([...cart]);
-    alert('This product already exists in the cart')
+    toast.error('This product already exists in the cart',{
+      duration: 2000,
+      position: 'top-center',
+      style: {
+        borderRadius: '8px',
+        background: '#333',
+        color: '#fff',
+      },
+    })
     return;
    }
    setCart([...cart, item]);
    localStorage.setItem('dataCart', JSON.stringify([...cart, item]));
-   alert('Good job!, Added to cart!')
+   toast.success('Good job!, Added to cart!', {
+    icon: '👏',
+    duration: 2000,
+    position: 'top-center',
+    style: {
+      borderRadius: '8px',
+      background: '#333',
+      color: '#fff',
+    },
+   })
    return;
   };
 
