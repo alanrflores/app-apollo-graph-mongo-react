@@ -4,8 +4,8 @@ import { FIND_PRODUCT } from "../../graphql/queries";
 import UpdateProductForm from "../updateProduct/UpdateProductForm";
 import ProductDetail from "../productDetail/ProductDetail";
 import ProductForm from "../productForm/ProductForm";
-import "./all-product.scss";
 import Paginated from "../../paginated/Paginated";
+import "./all-product.scss";
 
 const AllProduct = ({ products, itemPerPage, paginated, items }) => {
   const [getProduct, result] = useLazyQuery(FIND_PRODUCT);

@@ -4,6 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { LOGIN_USER } from "../../graphql/mutation.js";
 import ReactLoading from 'react-loading';
+import './login.scss';
 
 const Login = () => {
   const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
@@ -45,41 +46,32 @@ const Login = () => {
 
   return (
     <>
+    <div className="container-form-div">
       <form onSubmit={onSubmit} className="form-div">
-        <label style={{ color: "gray" }}>Email </label>
+        <label>Email </label>
         <input
           type="email"
           name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          style={{
-            margin: 4,
-            padding: 8,
-            borderRadius: 6,
-            border: 0,
-            backgroundColor: "#EBF5FB",
-          }}
+
         />
-        <label style={{ color: "gray" }}>Password </label>
+        <label>Password </label>
         <input
           type="password"
           name="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{
-            margin: 4,
-            padding: 8,
-            borderRadius: 6,
-            border: 0,
-            backgroundColor: "#EBF5FB",
-          }}
         />
+        <div className="div-button-login">
         <button className="buttonLogin" type="submit">
           Login
         </button>
+        </div>
         <Toaster />
         <div className="divError">{error && <p>{error.message}</p>}</div>
       </form>
+      </div>
     </>
   );
 };

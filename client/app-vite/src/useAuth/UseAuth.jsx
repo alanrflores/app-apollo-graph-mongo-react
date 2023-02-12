@@ -3,6 +3,7 @@ import React , { useState } from "react";
 import { useApolloClient, useMutation } from "@apollo/client";
 import { getTypenameFromResult } from "@apollo/client/utilities";
 import { LOGIN_USER } from "../graphql/mutation";
+import { useNavigate } from "react-router-dom";
 
 
 export function UseAuth() {
@@ -11,7 +12,7 @@ const [loginUser, { data, loading, error}] = useMutation(LOGIN_USER);
 const [userData, setUserData] = useState(null);
 
 const authToken = localStorage.getItem('token');
-
+const navigate = useNavigate();
 
 function isAuthenticated() {
     return authToken;
@@ -24,6 +25,7 @@ async function login(email, password) {
     //     window.localStorage.setItem('token', token);
     //   }
     localStorage.setItem('token', token);
+    localStorage.setItem('data', data);
     client.resetStore();
 };
 
@@ -32,8 +34,7 @@ function logout(){
     localStorage.removeItem('data')
     setUserData(null);
     client.resetStore();
-
-}
+};
 
 
 return {

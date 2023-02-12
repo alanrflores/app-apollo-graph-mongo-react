@@ -6,19 +6,22 @@ import Register from "../user/register/Register";
 import "./landing.css";
 import Login from "../user/login/Login";
 import { UseAuth } from "../useAuth/UseAuth.jsx";
+import { motion } from 'framer-motion';
+import { useState } from "react";
 
 const Landing = () => {
   // const client = useApolloClient();
-  const { userData, setUserData } = UseAuth();
+  const { userData, setUserData, logout } = UseAuth();
   const result = JSON.parse(localStorage.getItem("data"));
+  const [animation, setAnimation] = useState(false);
  
-
   useEffect(() => {
-  result && setUserData(result)
-  },[userData]);
-  
+     if(!result) {
+      setUserData(result)
+     }
+  },[]);
 
-
+  // console.log('user', userData)
   return (
     <div>
       <div>
@@ -37,7 +40,19 @@ const Landing = () => {
           alt=""
         />
       </div>
-      <div className="containerImg">
+      <motion.div 
+       className="containerImg"
+       drag
+       dragConstraints={{
+        right: 20
+       }}
+       whileHover={{
+        scale: 1
+       }}
+       whileTap={{
+        scale: 0.4
+       }}
+       >
         <img
           src="https://static.nike.com/a/images/f_auto/dpr_2.0,cs_srgb/w_1184,c_limit/957a33a3-83b5-4c7d-a482-c2e41005f3f1/marca-jordan.png"
           alt="nike-jordan"
@@ -45,8 +60,20 @@ const Landing = () => {
           heigth="100%"
           style={{ borderRadius: "10px" }}
         />
-      </div>
-      <div className="containerImg">
+      </motion.div>
+      <motion.div 
+       className="containerImg"
+       drag
+       dragConstraints={{
+        right: 20
+       }}
+       whileHover={{
+        scale: 1
+       }}
+       whileTap={{
+        scale: 0.4
+       }}
+       >
         <img
           src="https://static.nike.com/a/images/f_auto/dpr_2.0,cs_srgb/w_1184,c_limit/22953560-c7db-4617-ae29-cebb6a59a799/marca-jordan.jpg"
           alt="nike-jordan"
@@ -54,7 +81,7 @@ const Landing = () => {
           heigth="100%"
           style={{ borderRadius: "10px" }}
         />
-      </div>
+      </motion.div>
       <div className="titleReleases">
         <h2 style={{ fontFamily: "Futura", color: "gray", fontSize: "24px" }}>
           Latest releases.
@@ -67,7 +94,7 @@ const Landing = () => {
             alt="nike-zero"
             width="100%"
             heigth="100%"
-            style={{ marginRigth: "10px", borderRadius: "10px", zIndex: 1 }}
+            style={{  borderRadius: "10px", zIndex: 1 }}
           />
           <div className="divCraterbtn">
             <button className="buttonCrater">See more</button>
@@ -80,7 +107,7 @@ const Landing = () => {
             alt="nike-jordan"
             width="100%"
             heigth="100%"
-            style={{ marginLeft: "10px", borderRadius: "10px" }}
+            style={{ borderRadius: "10px" }}
           />
         </div>
       </div>
@@ -94,9 +121,9 @@ const Landing = () => {
           <button className="buttonSeeMore">See more</button>
         </Link>
       </div>
-      {result ? (
+      { result ? (
         <h1 style={{ color: "gray", padding: 30, fontFamily: "futura" }}>
-          Hi, {userData?.loginUser?.username} enjoy our products.
+          Hi, {result?.loginUser?.username} enjoy our products.
         </h1>
       ) : (
         <>

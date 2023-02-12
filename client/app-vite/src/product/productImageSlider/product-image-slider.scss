@@ -13,8 +13,7 @@
         .container-slider-img {
         
             .slider-img {
-                
-            margin-right: 400px;
+               margin-right: 400px;
                 img {
                     position: absolute;
                     top: 120px;
@@ -29,6 +28,11 @@
         .title-sneakers {
             width: 100%;
             margin-top: 250px;
+            h1 {
+                color: white;
+                font-size: 50;
+                margin-top: 30;
+            }
          
         }
     
@@ -48,3 +52,109 @@
         padding: 30px;
     }
 }
+
+
+@media only screen and (max-width: 620px) {
+    .product-images-slider {
+        .swiper-slide { 
+            padding: 60px;
+         
+            .container-slider-img {
+                .slider-img {
+                    margin-left: 10px;
+                  img{
+                    width: 360px;
+                    height: 270px;
+                    object-fit: cover;
+                    padding: 20px;
+                  }
+                
+              } 
+    
+           }
+           .title-sneakers {
+            
+             h1 {
+                font-size: x-large;
+                padding: 10px;
+             
+            
+             }
+             p {
+                display: none;
+             }
+           }
+    
+  }
+}
+}
+@media only screen and (min-width: 412px) and (max-width: 620px) {
+    .product-images-slider {
+        .swiper-slide { 
+            padding: 50px;
+         
+            .container-slider-img {
+                .slider-img {
+                    margin-left: 70px;
+                  img{
+                    width: 360px;
+                    height: 270px;
+                    object-fit: cover;
+                    padding: 20px;
+                  }
+                
+              } 
+    
+           }
+          
+        }
+    }
+}
+@media only screen and (min-width: 315px) and (max-width: 412px) {
+    .product-images-slider {
+        .swiper-slide { 
+            width: 100%;
+            height: 100%;
+            padding: 50px;
+            .container-slider-img {
+                width: 100%;
+                .slider-img {
+                 margin-left: 16px;
+                  img{
+                    width: 300px;
+                    height: 240px;
+                    object-fit: cover;
+                   
+                  }
+                
+              } 
+    
+           }
+  }
+}
+
+}
+@media only screen and (max-width: 315px) {
+    .product-images-slider {
+        .swiper-slide { 
+            width: 100%;
+            height: 100%;
+            padding: 28px;
+            .container-slider-img {
+                width: 100%;
+                .slider-img {
+                
+                  img{
+                    width: 300px;
+                    height: 240px;
+                    object-fit: cover;
+                   
+                  }
+                
+              } 
+    
+           }
+  }
+}
+}
+

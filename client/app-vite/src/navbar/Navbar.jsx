@@ -65,13 +65,11 @@ function Navbar() {
     <AppBar position="fixed" color='primary' style={{ borderRadius: 2 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-            <div>
+            <div className='div-image-navbar'>
                 <img 
                   src="https://static.nike.com/a/images/63f92881-8607-44b9-a4f8-e6b491c23702/white-light-grey-cobalt.png" 
                   alt="png-sneaker" 
-                  width='95px' 
-                  height='65px' 
-                  style={{ borderRadius: 20 }} />
+                  />
             </div>
           <Typography
             variant="h6"

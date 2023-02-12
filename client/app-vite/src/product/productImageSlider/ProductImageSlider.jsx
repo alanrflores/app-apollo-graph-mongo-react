@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, Pagination } from 'swiper';
+import { motion } from 'framer-motion'
 import './product-image-slider.scss'
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -58,9 +59,21 @@ const ProductImageSlider = props => {
                         : showBackground && word === 'air-jordan-2' ?  urlImgTwo : urlImgThree })`,
                         }}>
                         <div className='container-slider-img'>
-                        <div className='slider-img'>
+                        <motion.div  
+                         className='slider-img'
+                         animate={{ 
+                            y: -300, 
+                            opacity: 1,
+                            rotate: 360
+                        }} 
+                         initial={{ opacity: 0.1 }}
+                         transition={{ 
+                            type: 'spring',
+                            stiffness: 60
+                         }}>    
                         <img src={item} alt="slider-images" /> 
-                        </div>
+                        </motion.div> 
+                       
                         </div> 
                         <div className='title-sneakers'>
                         <span style={{ color: 'white', fontSize: 22}}>
@@ -68,7 +81,7 @@ const ProductImageSlider = props => {
                         : word === 'air-jordan-2' ?  'AIR JORDAN XX9' 
                         : word === 'air-jordan-3' ?  'AIR JORDAN XXX' 
                         : 'AIR JORDAN XXXI'  }</span>
-                        <h1 style={{ color: 'white',fontSize: 50, marginTop: 30}}>{ word === 'air-jordan-1' ? 'THE CONCEPT CAR OF BASKETBALL' :  word === 'air-jordan-2' ? 'THE WORLD’S BEST BASKETBALL SHOE' : word === 'air-jordan-3' ? 'THE NEXT FRONTIER OF FLIGHT' : 'THE NEW ANTI-GRAVITY MACHINES'  }</h1>
+                        <h1>{ word === 'air-jordan-1' ? 'THE CONCEPT CAR OF BASKETBALL' :  word === 'air-jordan-2' ? 'THE WORLD’S BEST BASKETBALL SHOE' : word === 'air-jordan-3' ? 'THE NEXT FRONTIER OF FLIGHT' : 'THE NEW ANTI-GRAVITY MACHINES'  }</h1>
                         <p style={{ color: 'white',fontSize: 30, marginTop: 30}}>{ word === 'air-jordan-1' ? 'As a pioneer of innovation for nearly three decades, the Jordan brand once again pushed the envelope with the Air Jordan XX9 — the world’s first woven basketball shoe. Drawing from Italian tailoring, the shoe had an entirely woven upper and set a new benchmark for the lightest Air Jordan ever.' :  word === 'air-jordan-2' ? 'In 2013, with the introduction of the AJ XX8, came a sea change for the Air Jordan line. Performance footwear had never seen anything like it. Within its unique, boot-high casing was veiled a surprisingly responsive shoe with less weight than players had reasonably come to expect.' :  word === 'air-jordan-3' ? 'With the third X comes an epic milestone in the Air Jordan lineage. Three decades of innovation and accomplishment culminate here, in a shoe for the ages. A celebration is in order, as again, sights are set toward the next frontier.' : 'The AJ XXXI pays its respects to the Air Jordan heritage in a way no other model yet has. From the brash, energetic figure MJ was in his Air Jordan Is, to the 30+ year legacy of Air that he inspired, the XXXI is the uniquely positioned to carry the torch and hold it high.'}</p>
                         </div>
                     </SwiperSlide>

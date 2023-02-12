@@ -6,6 +6,8 @@ import Dialog from "@mui/material/Dialog";
 import DialogContentText from "@mui/material/DialogContentText";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import './register.scss';
+
 
 const Register = () => {
   const [registerUser, { data, loading, error }] = useMutation(REGISTER_USER);
@@ -75,7 +77,7 @@ const Register = () => {
   };
 
   return (
-    <div className="divRegister">
+    <div className="div-register">
       <div>
         <span>You do not have an account ?</span>
         <Button

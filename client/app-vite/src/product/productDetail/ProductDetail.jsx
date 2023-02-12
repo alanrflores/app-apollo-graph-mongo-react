@@ -81,8 +81,7 @@ const ProductDetail = ({ product, showProduct }) => {
               <img
                 src={item?.url}
                 alt="product-image"
-                width="580px"
-                height="340px"
+               
               />
               <div style={{ padding: 6 }}>
                 <span style={{ color: "gray" }}>Available: {stock}</span>
@@ -113,7 +112,7 @@ const ProductDetail = ({ product, showProduct }) => {
             <span>USD {product?.price}</span>
             <hr />
             <label>Description </label>
-            <p>{product?.description}</p>
+            <span>{product?.description}</span>
           </div>
         </div>
         <button
