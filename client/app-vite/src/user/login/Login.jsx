@@ -24,20 +24,20 @@ const Login = () => {
       const { token } = data.loginUser;
       localStorage.setItem("token", token);
       localStorage.setItem("data", JSON.stringify(data));
-      if (data) {
-        toast.success(`Welcome user, ${data?.loginUser?.email}!`, {
-          duration: 3000,
-          position: "top-center",
-          icon: "👏",
-        });
-        navigate("/home");
-      }
+      navigate("/home");
     //   client.resetStore();
     } catch (error) {
       console.error(error.message);
     }
   };
-
+  if (data) {
+    return toast.success(`Bienvenido usuario, ${data?.loginUser?.email}!`, {
+      duration: 4000,
+      position: "top-center",
+      icon: "👏",
+    });
+    
+  }
   if (loading) {
     return <div>
                 <ReactLoading type={"spokes"} color={"black"} height={40} width={40} />
@@ -53,19 +53,21 @@ const Login = () => {
           type="email"
           name="email"
           value={email}
+          placeholder="Ingrese su Email"
           onChange={(e) => setEmail(e.target.value)}
 
         />
-        <label>Password </label>
+        <label>Contraseña </label>
         <input
           type="password"
           name="password"
           value={password}
+          placeholder="Ingrese su contraseña"
           onChange={(e) => setPassword(e.target.value)}
         />
         <div className="div-button-login">
         <button className="buttonLogin" type="submit">
-          Login
+          Acceso
         </button>
         </div>
         <Toaster />

@@ -12,12 +12,12 @@ const Footer = () => {
     <div className="footerPadre">
       <div className="footerContainer">
         <div className="footerRegister">
-          <h4>Nearest premises</h4>
-          <h4>Sign up to receive news</h4>
+          <h4>Local más cercano</h4>
+          <h4>Regístrese para recibir noticias</h4>
         </div>
         <div className="footerAbout">
-          <h4>About sneakers</h4>
-          <span>News</span>
+          <h4>Acerca de las zapatillas</h4>
+          <span>Noticias</span>
         </div>
         <div className="footerSocialRed">
           <div className="divSocialRed">
@@ -41,12 +41,12 @@ const Footer = () => {
             <FmdGoodIcon /> Argentina
           </span>
           <span style={{ marginLeft: 10, padding: 10 }}>
-            © 2023 SNKRS, Inc. All rights reserved.
+            © 2023 SNKRS, Inc. Reservados todos los derechos.
           </span>
         </div>
         <div className="divSubTitle">
-          <span style={{ marginRight: 20, padding: 10 }}>Terms of use</span>
-          <span style={{ marginRight: 20, padding: 10 }}>Privacy Policy</span>
+          <span style={{ marginRight: 20, padding: 10 }}>Condiciones de uso</span>
+          <span style={{ marginRight: 20, padding: 10 }}>Política de privacidad</span>
         </div>
       </div>
     </div>

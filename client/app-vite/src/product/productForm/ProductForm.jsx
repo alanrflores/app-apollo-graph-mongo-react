@@ -35,7 +35,7 @@ const ProductForm = ({ setError }) => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     if(!title || !price || !description || !stock ) 
-    return toast('Fill in the fields', {
+    return toast('Rellena los campos', {
     duration: 3000,
     });
 
@@ -50,7 +50,7 @@ const ProductForm = ({ setError }) => {
 
      const response = await createProduct({ variables: { product: { title, price, description, quantity, stock, images }}});
      if(response){
-            toast.success('Successfully product created!', {
+            toast.success('Producto creado con éxito', {
               duration: 3000,
               position: 'top-center',
               icon: '👏',
@@ -61,7 +61,7 @@ const ProductForm = ({ setError }) => {
               },
             });
           }else{
-            toast.error('Please complete the fields correctly',{
+            toast.error('Por favor complete los campos correctamente',{
               duration: 3000,
               position: 'top-center',
               style: {
@@ -105,7 +105,7 @@ const ProductForm = ({ setError }) => {
         variant="outlined"
         onClick={handleClickOpen}
       >
-        Add new product
+        Agregar nuevo producto
       </Button>
       <Dialog
         sx={{
@@ -117,11 +117,10 @@ const ProductForm = ({ setError }) => {
         onClose={handleClose}
       >
         <h1 style={{ color: "gray", padding: 8, fontFamily: "monospace" }}>
-          New Product
+          Nuevo Producto
         </h1>
         <DialogContentText sx={{ padding: 4, fontFamily: "monospace" }}>
-          To add product to this website, please enter your data here. We will
-          send updates occasionally.
+          Para agregar producto a este sitio web, por favor ingrese sus datos aquí.
         </DialogContentText>
         <form
           style={{ display: "flex", justifyContent: "center" }}
@@ -138,7 +137,7 @@ const ProductForm = ({ setError }) => {
                 marginTop: 10,
               }}
               type="title"
-              placeholder="title"
+              placeholder="titulo"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -152,7 +151,7 @@ const ProductForm = ({ setError }) => {
                 marginTop: 10,
               }}
               type="price"
-              placeholder="price"
+              placeholder="precio"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
@@ -166,7 +165,7 @@ const ProductForm = ({ setError }) => {
                 marginTop: 10,
               }}
               type="description"
-              placeholder="description"
+              placeholder="descripción"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -180,7 +179,7 @@ const ProductForm = ({ setError }) => {
                 marginTop: 10,
               }}
               type="quantity"
-              placeholder="quantity"
+              placeholder="cantidad"
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
             />
@@ -199,7 +198,7 @@ const ProductForm = ({ setError }) => {
               onChange={(e) => setStock(e.target.value)}
             />
             <label style={{ marginTop: 6, color: 'gray' }}>
-              Images
+              Imagenes
             { images?.map((image, index)=> (
                <div key={index}>
                   <input 
@@ -219,7 +218,7 @@ const ProductForm = ({ setError }) => {
                    />
                    <input 
                    type="text"
-                   placeholder="title"
+                   placeholder="titulo"
                    value={images.title}
                    onChange={(e)=> setImages(images?.map((img, i) => (
                     index === i ? {...img, title: e.target.value} : img
@@ -281,7 +280,7 @@ const ProductForm = ({ setError }) => {
                   }}
                   onClick={handleClose}
                 >
-                  Add product
+                  Agregar Producto
                 </button>
                 <Toaster />
             </div>

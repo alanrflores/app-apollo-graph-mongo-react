@@ -42,7 +42,7 @@ const UpdateProductForm = ({ productId, product }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title || !price || !description || !stock ) 
-      return toast('Fill in the fields', {
+      return toast('Rellena los campos', {
       duration: 3000,
       });
 
@@ -63,7 +63,7 @@ const UpdateProductForm = ({ productId, product }) => {
         },
       });
       if (response) {
-        toast.success('Update product!', {
+        toast.success('Producto Actualizado', {
           duration: 3000,
           position: 'top-center',
           icon: '👏',
@@ -74,7 +74,7 @@ const UpdateProductForm = ({ productId, product }) => {
           },
         });
       }else{
-        toast.error('Please complete the fields correctly',{
+        toast.error('Por favor complete los campos correctamente',{
           duration: 3000,
           position: 'top-center',
           style: {
@@ -109,7 +109,7 @@ const UpdateProductForm = ({ productId, product }) => {
     setImages(filterImage !== item)
    };
   // console.log('images',images?.map((item) => item))
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Cargando...</p>;
 
   return (
     <div className="container-create-product">
@@ -125,7 +125,7 @@ const UpdateProductForm = ({ productId, product }) => {
         variant="outlined"
         onClick={handleClickOpen}
       >
-        Update product
+        Actualizar Producto
       </Button>
       <Dialog
         sx={{
@@ -137,8 +137,7 @@ const UpdateProductForm = ({ productId, product }) => {
         onClose={handleClose}
       >
         <DialogContentText sx={{ padding: 4, fontFamily: "monospace" }}>
-          To update product to this website, please enter your data here. We
-          will send updates occasionally.
+        Para actualizar el producto a este sitio web, ingrese sus datos aquí.
         </DialogContentText>
         <form
           style={{ display: "flex", justifyContent: "center" }}
@@ -155,7 +154,7 @@ const UpdateProductForm = ({ productId, product }) => {
                 marginTop: 10,
               }}
               type="title"
-              placeholder="title"
+              placeholder="titulo"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -169,7 +168,7 @@ const UpdateProductForm = ({ productId, product }) => {
                 marginTop: 10,
               }}
               type="price"
-              placeholder="price"
+              placeholder="precio"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
             />
@@ -183,7 +182,7 @@ const UpdateProductForm = ({ productId, product }) => {
                 marginTop: 10,
               }}
               type="description"
-              placeholder="description"
+              placeholder="descripción"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
@@ -197,7 +196,7 @@ const UpdateProductForm = ({ productId, product }) => {
                 marginTop: 10,
               }}
               type="quantity"
-              placeholder="quantity"
+              placeholder="cantidad"
               value={quantityInt}
               onChange={(e) => setQuantity(e.target.value)}
             />
@@ -216,7 +215,7 @@ const UpdateProductForm = ({ productId, product }) => {
               onChange={(e) => setStock(e.target.value)}
             />
             <label style={{ marginTop: 6, color: "gray" }}>
-              Images
+              Imagenes
              
               {images?.map((image, index) => (
                 <div key={index}>
@@ -241,7 +240,7 @@ const UpdateProductForm = ({ productId, product }) => {
                   />
                   <input
                     type="text"
-                    placeholder="title"
+                    placeholder="titulo"
                     value={image.title}
                     onChange={(e) =>
                       setImages(
@@ -315,7 +314,7 @@ const UpdateProductForm = ({ productId, product }) => {
                   }}
                   onClick={handleClose}
                 >
-                  Update product
+                  Actualizar Producto
                 </button>
                 <Toaster />
             </div>

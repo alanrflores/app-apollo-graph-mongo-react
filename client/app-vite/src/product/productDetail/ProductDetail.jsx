@@ -32,7 +32,18 @@ const ProductDetail = ({ product, showProduct }) => {
   };
 
   const byAddingCart = () => {
-    if (stock < 0 || quantity <= 0) return;
+    if (stock <= 0 || quantity <= 0) {
+      toast.error('No hay stock disponible para este producto',{
+        duration: 2000,
+        position: 'top-center',
+        style: {
+          borderRadius: '8px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+      return;
+    }
     addItem(item);
     
   };
@@ -84,11 +95,11 @@ const ProductDetail = ({ product, showProduct }) => {
                
               />
               <div style={{ padding: 6 }}>
-                <span style={{ color: "gray" }}>Available: {stock}</span>
+                <span style={{ color: "gray" }}>Disponibles: {stock}</span>
               </div>
               <hr />
               <span style={{ padding: 10, color: "gray", marginTop: 10 }}>
-                Quantity
+                Cantidad
               </span>
               <div className="btn-buy">
                 <RemoveCircleIcon onClick={() => restQuantity()} />
@@ -100,7 +111,7 @@ const ProductDetail = ({ product, showProduct }) => {
                 style={{ padding: 6, color: "gray", marginTop: 4 }}
                 onClick={() => byAddingCart(item)}
               >
-                Buy now
+                Comprar ahora
               </button>
             </SwiperSlide>
           ))}
@@ -108,10 +119,10 @@ const ProductDetail = ({ product, showProduct }) => {
         <div className="div-container-title">
           <h2>{product?.title}</h2>
           <div className="div-description">
-            <label>Original Price </label>
+            <label>Precio original </label>
             <span>USD {product?.price}</span>
             <hr />
-            <label>Description </label>
+            <label>Descripción </label>
             <span>{product?.description}</span>
           </div>
         </div>
@@ -126,7 +137,7 @@ const ProductDetail = ({ product, showProduct }) => {
           }}
           onClick={() => showProduct(null)}
         >
-          Close
+          Cerrar
         </button>
         <Toaster />
       </div>

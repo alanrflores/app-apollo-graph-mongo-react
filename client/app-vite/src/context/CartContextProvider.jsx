@@ -31,7 +31,7 @@ const CartContextProvider = ({ children }) => {
   const addItem = (item) => {
    if(checkExistInTheCart(cart, item)){
     setCart([...cart]);
-    toast.error('This product already exists in the cart',{
+    toast.error('Este producto ya existe en el carrito',{
       duration: 2000,
       position: 'top-center',
       style: {
@@ -44,7 +44,7 @@ const CartContextProvider = ({ children }) => {
    }
    setCart([...cart, item]);
    localStorage.setItem('dataCart', JSON.stringify([...cart, item]));
-   toast.success('Good job!, Added to cart!', {
+   toast.success('¡Buen trabajo!, Añadido al carrito', {
     icon: '👏',
     duration: 2000,
     position: 'top-center',

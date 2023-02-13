@@ -46,7 +46,7 @@ const [updateProductStock, {data}] = useMutation(UPDATE_PRODUCT_STOCK , {
     localStorage.removeItem('payment');
     localStorage.removeItem('dataCart');
     clearItem(item?.map(i => i.id))
-    navigate('/')
+    navigate('/home')
   } catch (error) {
     console.log(error)
   }
@@ -56,7 +56,7 @@ const [updateProductStock, {data}] = useMutation(UPDATE_PRODUCT_STOCK , {
     updateData();
     const set = setTimeout(() => {
      onSubmit();
-    }, 4000);
+    }, 6000);
    }, []);
 
  
@@ -69,10 +69,10 @@ const [updateProductStock, {data}] = useMutation(UPDATE_PRODUCT_STOCK , {
             <>
             <Card sx={{ maxWidth: 420 }}>
             <div className='success-id'>
-            <h2>Thanks for the purchase 
+            <h2>Gracias por la compra
               <ThumbUpAltSharpIcon sx={{ color: 'green', marginLeft: 1, marginTop: 2 }}/>
             </h2> 
-              <h3>Purchase order ID: 
+              <h3>ID de orden de compra: 
                 <br /> {payment.createPayment.id}
               </h3>
               <hr />
@@ -91,10 +91,10 @@ const [updateProductStock, {data}] = useMutation(UPDATE_PRODUCT_STOCK , {
                 <span>{item.description}</span> <br />
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                <span>Quantity: {item.quantity}</span> <br />
+                <span>Cantidad: {item.quantity}</span> <br />
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                <span>Price: USD {item.unit_price}</span> <br />
+                <span>Precio: USD {item.unit_price}</span> <br />
                 </Typography>
                 </CardContent>
                 </div>

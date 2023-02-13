@@ -49,7 +49,7 @@ const AllProduct = ({ products, itemPerPage, paginated, items }) => {
   return (
     <>
       <div className="container-product">
-        <h1>SNKRS EXCLUSIVE</h1>
+        <h1>ZAPATILLAS EXCLUSIVAS</h1>
         {resultStorage.loginUser.role === "ADMIN" ? <ProductForm /> : ""}
 
         <section className="div-product">
@@ -112,8 +112,8 @@ const AllProduct = ({ products, itemPerPage, paginated, items }) => {
         </section>
         <section className="section-img-two">
           <h1>
-            I CAN ACCEPT FAILURE. EVERYONE FAILS AT SOMETHING. BUT I CAN’T
-            ACCEPT NOT TRYING.
+             PUEDO ACEPTAR EL FRACASO. TODOS FALLAMOS EN ALGO. PERO NO PUEDO
+             ACEPTAR NO INTENTAR.
           </h1>
           <div className="div-img-jordan">
             <img

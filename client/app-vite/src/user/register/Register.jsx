@@ -23,7 +23,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username && !email && !password)
-      return toast.error("Fill in the fields", {
+      return toast.error("Rellena los campos", {
         duration: 3000,
         style: {
           borderRadius: '8px',
@@ -46,7 +46,7 @@ const Register = () => {
         setAvatar("");
         setRole("");
 
-        return toast.success("User created!", {
+        return toast.success("Usuario creado", {
           duration: 3000,
           position: "top-center",
           icon: "👏",
@@ -79,7 +79,7 @@ const Register = () => {
   return (
     <div className="div-register">
       <div>
-        <span>You do not have an account ?</span>
+        <span>No tienes cuenta ?</span>
         <Button
           sx={{
             borderRadius: 5,
@@ -88,12 +88,13 @@ const Register = () => {
             borderBlockColor: "black",
             fontFamily: "monospace",
             padding: 1.2,
+            marginLeft: 1
           }}
           variant="outlined"
           onClick={handleClickOpen}
         >
           {" "}
-          Sign up{" "}
+          Registrarse {" "}
         </Button>
 
         <Dialog
@@ -112,10 +113,10 @@ const Register = () => {
               fontFamily: "monospace",
             }}
           >
-            New User
+            Nuevo usuario
           </h1>
           <DialogContentText sx={{ padding: 4, fontFamily: "monospace" }}>
-            Register to be able to see and buy the products we offer.
+            Regístrate para poder ver y comprar los productos que ofrecemos.
           </DialogContentText>
           <form
             style={{
@@ -126,7 +127,7 @@ const Register = () => {
             onSubmit={handleSubmit}
           >
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <label style={{ color: "gray" }}>Username </label>
+              <label style={{ color: "gray" }}>Nombre de usuario </label>
               <input
                 style={{
                   padding: 8,
@@ -137,7 +138,7 @@ const Register = () => {
                   marginTop: 10,
                 }}
                 type="username"
-                placeholder="username"
+                placeholder="Ingrese su nombre de usuario"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -153,10 +154,11 @@ const Register = () => {
                 }}
                 type="email"
                 name="email"
+                placeholder="Ingrese su Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <label style={{ color: "gray" }}>Password </label>
+              <label style={{ color: "gray" }}>Contraseña </label>
               <input
                 style={{
                   padding: 8,
@@ -169,6 +171,7 @@ const Register = () => {
                 type="password"
                 name="password"
                 value={password}
+                placeholder="Ingrese su contraseña"
                 onChange={(e) => setPassword(e.target.value)}
               />
               <label style={{ color: "gray" }}>Avatar </label>
@@ -184,9 +187,10 @@ const Register = () => {
                 type="avatar"
                 name="avatar"
                 value={avatar}
+                placeholder="Sube una imagen de perfíl"
                 onChange={(e) => setAvatar(e.target.value)}
               />
-              <label style={{ color: "gray" }}>Role </label>
+              <label style={{ color: "gray" }}>Rol </label>
               <input
                 style={{
                   padding: 8,
@@ -205,7 +209,7 @@ const Register = () => {
                 type="submit"
                 style={{ padding: 8, marginTop: 10, borderRadius: 6 }}
               >
-                Signup
+                Registrarse
               </Button>
               <Toaster />
             </div>

@@ -62,7 +62,6 @@ const ProductImageSlider = props => {
                         <motion.div  
                          className='slider-img'
                          animate={{ 
-                            y: -300, 
                             opacity: 1,
                             rotate: 360
                         }} 
@@ -81,8 +80,14 @@ const ProductImageSlider = props => {
                         : word === 'air-jordan-2' ?  'AIR JORDAN XX9' 
                         : word === 'air-jordan-3' ?  'AIR JORDAN XXX' 
                         : 'AIR JORDAN XXXI'  }</span>
-                        <h1>{ word === 'air-jordan-1' ? 'THE CONCEPT CAR OF BASKETBALL' :  word === 'air-jordan-2' ? 'THE WORLD’S BEST BASKETBALL SHOE' : word === 'air-jordan-3' ? 'THE NEXT FRONTIER OF FLIGHT' : 'THE NEW ANTI-GRAVITY MACHINES'  }</h1>
-                        <p style={{ color: 'white',fontSize: 30, marginTop: 30}}>{ word === 'air-jordan-1' ? 'As a pioneer of innovation for nearly three decades, the Jordan brand once again pushed the envelope with the Air Jordan XX9 — the world’s first woven basketball shoe. Drawing from Italian tailoring, the shoe had an entirely woven upper and set a new benchmark for the lightest Air Jordan ever.' :  word === 'air-jordan-2' ? 'In 2013, with the introduction of the AJ XX8, came a sea change for the Air Jordan line. Performance footwear had never seen anything like it. Within its unique, boot-high casing was veiled a surprisingly responsive shoe with less weight than players had reasonably come to expect.' :  word === 'air-jordan-3' ? 'With the third X comes an epic milestone in the Air Jordan lineage. Three decades of innovation and accomplishment culminate here, in a shoe for the ages. A celebration is in order, as again, sights are set toward the next frontier.' : 'The AJ XXXI pays its respects to the Air Jordan heritage in a way no other model yet has. From the brash, energetic figure MJ was in his Air Jordan Is, to the 30+ year legacy of Air that he inspired, the XXXI is the uniquely positioned to carry the torch and hold it high.'}</p>
+                        <h1>{ word === 'air-jordan-1' ? 'LAS ZAPATILLAS CONCEPTUALES DEL BALONCESTO' :  word === 'air-jordan-2' ? 'LAS MEJORES ZAPATILLAS DE BALONCESTO DEL MUNDO' : word === 'air-jordan-3' ? 'LA PRÓXIMA FRONTERA DEL VUELO' : 'LAS NUEVAS MÁQUINAS ANTIGRAVEDAD'  }</h1>
+                        <p style={{ color: 'white',fontSize: 30, marginTop: 30}}>{ word === 'air-jordan-1' 
+                        ? 'Como pionera de la innovación durante casi tres décadas, la marca Jordan una vez más fue más allá con las Air Jordan XX9, las primeras zapatillas de baloncesto tejidas del mundo. Inspirándose en la sastrería italiana, el calzado tenía una parte superior totalmente tejida y estableció un nuevo punto de referencia para el Air Jordan más ligero de la historia.' 
+                        :  word === 'air-jordan-2' 
+                        ? 'En 2013, con la presentación de las AJ XX8, se produjo un cambio radical en la línea Air Jordan. El calzado de alto rendimiento nunca había visto nada igual. Dentro de su carcasa única, a la altura de la bota, se ocultaba un zapato sorprendentemente receptivo con menos peso de lo que los jugadores esperaban razonablemente.' 
+                        :  word === 'air-jordan-3' 
+                        ? 'Con la tercera X llega un hito épico en el linaje de Air Jordan. Tres décadas de innovación y logros culminan aquí, en un calzado para la historia. Una celebración está en orden, ya que nuevamente, las vistas están puestas hacia la próxima frontera.' 
+                        : 'El AJ XXXI rinde homenaje a la herencia de Air Jordan como ningún otro modelo lo ha hecho hasta ahora. Desde la figura descarada y enérgica que MJ tenía en su Air Jordan Is, hasta el legado de más de 30 años de Air que inspiró, el XXXI está en una posición única para llevar la antorcha y mantenerla en alto.'}</p>
                         </div>
                     </SwiperSlide>
                 

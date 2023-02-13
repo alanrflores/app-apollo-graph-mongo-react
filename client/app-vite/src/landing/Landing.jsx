@@ -31,7 +31,7 @@ const Landing = () => {
       </div>
       <div>
         <h1 style={{ marginTop: 50, color: "gray" }}>
-          All our sneakers available.
+         Todas nuestras zapatillas disponibles.
         </h1>
         <img
           src="https://i.pinimg.com/originals/53/4b/3d/534b3d306b597e6c19291686b5e04033.png"
@@ -84,7 +84,7 @@ const Landing = () => {
       </motion.div>
       <div className="titleReleases">
         <h2 style={{ fontFamily: "Futura", color: "gray", fontSize: "24px" }}>
-          Latest releases.
+         Últimos lanzamientos.
         </h2>
       </div>
       <div className="containerImgPar">
@@ -97,7 +97,7 @@ const Landing = () => {
             style={{  borderRadius: "10px", zIndex: 1 }}
           />
           <div className="divCraterbtn">
-            <button className="buttonCrater">See more</button>
+            <button className="buttonCrater">Ver más</button>
           </div>
         </div>
         <h4 className="textImPar">CRATER IMPACT</h4>
@@ -113,17 +113,17 @@ const Landing = () => {
       </div>
       <div className="containerTitle">
         <h2 style={{ fontFamily: "Futura", color: "gray", fontSize: 24 }}>
-          The ideal place for your Sneakers.
+        El lugar ideal para encontrar tus zapatillas.
         </h2>
       </div>
       <div className="divButton">
         <Link to="/home">
-          <button className="buttonSeeMore">See more</button>
+          <button className="buttonSeeMore">Ver más</button>
         </Link>
       </div>
       { result ? (
         <h1 style={{ color: "gray", padding: 30, fontFamily: "futura" }}>
-          Hi, {result?.loginUser?.username} enjoy our products.
+          Hola, {result?.loginUser?.username} disfruta de nuestros productos.
         </h1>
       ) : (
         <>
@@ -136,7 +136,7 @@ const Landing = () => {
               fontSize: 24,
             }}
           >
-            Login to see our products.
+            Inicia sesión para ver nuestros productos.
           </h1>
           <div className="container-form">
             <Login />

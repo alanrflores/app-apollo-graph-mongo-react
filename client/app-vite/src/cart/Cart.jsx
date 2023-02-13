@@ -5,7 +5,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { CREATE_PAYMENT } from "../graphql/mutation";
 import { useMutation } from "@apollo/client";
 import toast, { Toaster } from 'react-hot-toast';
-import ProductImageSlider from "../product/productImageSlider/ProductImageSlider";
+import ReactLoading from 'react-loading';
 import "./cart.scss";
 
 const Cart = () => {
@@ -39,16 +39,12 @@ const Cart = () => {
     }
   };
 
-  if (loading)
-    return toast.loading('Loading...', {
-      duration: 2000,
-      position: 'top-center',
-      style: {
-        borderRadius: '8px',
-        background: '#333',
-        color: '#fff',
-      },
-    })
+  if (loading) {
+    return <div className="container-loading-cart">
+              <ReactLoading type={"spokes"} color={"black"} height={40} width={40} />
+           </div>;
+  }
+    
     
     const id = product?.map((item) => item.id)
     const quantity = product?.map((item) => item.quantity)
@@ -61,11 +57,11 @@ const Cart = () => {
           <>
             <div className="cart-empty">
               <div className="cart-empty-items">
-              <h2>Empty</h2>
-              <p>There are no items in your cart.</p>
+              <h2>Vacío</h2>
+              <p>No hay artículos en su carrito.</p>
               <div className="button-empty">
                 <Link to={"/home"}>
-                  <button>Search now</button>
+                  <button>Buscar ahora</button>
                 </Link>
               </div>
               </div>
@@ -101,7 +97,7 @@ const Cart = () => {
               <div key={index} className="container-cart-map">
                 <div className="cart-product">
                   <div className="cart-detail">
-                    <img src={findImage.url} alt="image-not-found" />
+                    <img src={findImage?.url} alt="image-not-found" />
                     <div className="cart-description">
                       <div className="cart-div">
                         <h2>{newItem.title}</h2>
@@ -109,7 +105,7 @@ const Cart = () => {
                       </div>
                       <div style={{ padding: 6 }}>
                         <span style={{ color: "gray" }}>
-                          Quantity: {newItem.quantity}
+                          Cantidad: {newItem.quantity}
                         </span>
                         <hr />
                       </div>
@@ -135,7 +131,7 @@ const Cart = () => {
                       <button
                         onClick={() => handleSubmit(id, quantity)}
                       >
-                        I confirm
+                        Confirmar
                       </button>
                     </div>
                   ) : ( "" )

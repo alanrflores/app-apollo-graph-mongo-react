@@ -19,8 +19,8 @@ import { CartContext } from '../context/CartContextProvider';
 import './navbar.scss'
 
 
-const pages = [{name:'Products', path: '/home'}, {name:'Blog', path: '/blog'}];
-const settings = ['Logout'];
+const pages = [{name:'Productos', path: '/home'}, {name:'Blog', path: '/blog'}];
+const settings = ['Cerrar sesión'];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
