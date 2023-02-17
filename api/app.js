@@ -38,7 +38,7 @@ async function start() {
   });
 
   await server.start();
-  server.applyMiddleware({ app, path: "/" });
+  server.applyMiddleware({ app, path: "/graphql" });
 
   app.listen(process.env.PORT, () => {
     console.log(`Server running on ${process.env.PORT}`);
