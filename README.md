@@ -1,40 +1,39 @@
 # app-apollo-graph-mongo-react
 
 👟
--- <h1>E-commerce demo de venta de zapatillas</h1> ---
-Este proyecto es una demo de un e-commerce de venta de zapatillas, construido con el objetivo de demostrar cómo se puede implementar un sitio web de compras en línea con características y funcionalidades comunes en una aplicación de este tipo.
+ <h1>E-commerce demo de venta de zapatillas</h1> 
+<p>Este proyecto es una demo de un e-commerce de venta de zapatillas, construido con el objetivo de demostrar cómo se puede implementar un sitio web de compras en línea con características y funcionalidades comunes en una aplicación de este tipo. </p>
 
-Características y funcionalidades
-Algunas de las características y funcionalidades principales de este proyecto son:
+<h1>Características y funcionalidades</h1>
+<p>Algunas de las características y funcionalidades principales de este proyecto son: </p>
 
-Registro y inicio de sesión de usuarios
-Agregar productos al carrito de compras
-Realizar pagos a través de MercadoPago
-Ver ticket de compra
-Tecnologías utilizadas
-Este proyecto está construido utilizando las siguientes tecnologías:
+<span>Registro y inicio de sesión de usuarios</span>
+<span>Agregar productos al carrito de compras</span>
+<span>Realizar pagos a través de MercadoPago</span>
+<span>Ver ticket de compra</span>
+<h1>Tecnologías utilizadas</h1>
+<p>Este proyecto está construido utilizando las siguientes tecnologías: </p>
 
-JavaScript, React, para la interfaz de usuario
-Node.js y GraphQL para el servidor web
-Apollo server para conectarse con cualquier cliente GraphQL
-MongoDB para la base de datos
-MercadoPago API para procesar los pagos
+<span>JavaScript, React, para la interfaz de usuario</span>
+<span>Node.js y GraphQL para el servidor web</span>
+<span>Apollo server para conectarse con cualquier cliente GraphQL</span>
+<span>MongoDB para la base de datos</span>
+<span>MercadoPago API para procesar los pagos</span>
 
-Cómo instalar y ejecutar
-Para ejecutar este proyecto en un ambiente de desarrollo, sigue los siguientes pasos:
+<h1>Cómo instalar y ejecutar</h1>
+<p>Para ejecutar este proyecto en un ambiente de desarrollo, sigue los siguientes pasos:</p>
 
-Clona este repositorio en tu computadora:
+<p>Clona este repositorio en tu computadora:</p>
 
 git clone https://github.com/tu-usuario/nombre-de-tu-repositorio.git
 
-Instala las dependencias necesarias:
+<p>Instala las dependencias necesarias: </p>
 
-npm install
-Crea un archivo .env en la raíz del proyecto con las siguientes variables de entorno:
-makefile
-Copy code
-MONGO_URL=tu-url-de-mongodb
-MP_ACCESS_KEY=tu-client-access-de-mercadopago
+<span>npm install</span>
+<p>Crea un archivo .env en la raíz del proyecto con las siguientes variables de entorno: </p>
 
-Ejecuta el proyecto con el siguiente comando:
-npm run dev
+<span>MONGO_URL=tu-url-de-mongodb</span>
+<span>MP_ACCESS_KEY=tu-client-access-de-mercadopago</span>
+
+<p>Ejecuta el proyecto con el siguiente comando: </p>
+<span>npm run dev</span>
