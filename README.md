@@ -5,13 +5,15 @@
 <p>Este proyecto es una demo de un e-commerce de venta de zapatillas, construido con el objetivo de demostrar cómo se puede implementar un sitio web de compras en línea con características y funcionalidades comunes en una aplicación de este tipo. </p>
 
 <h1>Características y funcionalidades</h1>
-<p>Algunas de las características y funcionalidades principales de este proyecto son: </p>
+<ul>
+ Algunas de las características y funcionalidades principales de este proyecto son: 
 
-<span>Registro y inicio de sesión de usuarios</span>
-<span>Agregar productos al carrito de compras</span>
-<span>Realizar pagos a través de MercadoPago</span>
-<span>Ver ticket de compra</span>
+<li>Registro y inicio de sesión de usuarios</li>
+<li>Agregar productos al carrito de compras</li>
+<li>Realizar pagos a través de MercadoPago</li>
+<li>Ver ticket de compra</li>
 <h1>Tecnologías utilizadas</h1>
+ </ul>
 <p>Este proyecto está construido utilizando las siguientes tecnologías: </p>
 
 <span>JavaScript, React, para la interfaz de usuario</span>
