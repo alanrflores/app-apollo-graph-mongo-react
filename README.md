@@ -31,13 +31,14 @@
 
 git clone https://github.com/tu-usuario/nombre-de-tu-repositorio.git
 
-<p>Instala las dependencias necesarias: </p>
+<h3>Instala las dependencias necesarias: </h3>
 
-<span>npm install</span>
+<p>npm install</p>
 <p>Crea un archivo .env en la raíz del proyecto con las siguientes variables de entorno: </p>
+<ul>
+<li>MONGO_URL=tu-url-de-mongodb</li>
+<li>MP_ACCESS_KEY=tu-client-access-de-mercadopago</li>
+</ul>
 
-<span>MONGO_URL=tu-url-de-mongodb</span>
-<span>MP_ACCESS_KEY=tu-client-access-de-mercadopago</span>
-
-<p>Ejecuta el proyecto con el siguiente comando: </p>
-<span>npm run dev</span>
+<h3>Ejecuta el proyecto con el siguiente comando: </h3>
+<p>npm run dev</p>
